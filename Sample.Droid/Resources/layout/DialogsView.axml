@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:text="Message"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Text Message" />
+    <TextView
+        android:text="Title"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Text Title" />
+    <TextView
+        android:text="Confirm Text"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Text ConfirmText" />
+    <TextView
+        android:text="Cancel Text"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent" />
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Text CancelText" />
+    <Button
+        android:text="Alert"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Click AlertCommand" />
+    <Button
+        android:text="Confirm"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Click ConfirmCommand" />
+    <Button
+        android:text="String Prompt"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Click StringPromptCommand" />
+    <Button
+        android:text="Alert"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        local:MvxBind="Click PasswordPromptCommand" />
+</LinearLayout>

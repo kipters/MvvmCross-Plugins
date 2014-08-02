@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9E8BE03E-3D60-46C3-9343-DC8CFD0A7C50}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
@@ -88,6 +86,14 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <Compile Include="FieldsViewController.cs" />
+    <Compile Include="FieldsViewController.designer.cs">
+      <DependentUpon>FieldsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogsViewController.cs" />
+    <Compile Include="DialogsViewController.designer.cs">
+      <DependentUpon>DialogsViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sample.TouchViewController.designer.cs">
@@ -100,15 +106,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dialogs.Touch\Dialogs.Touch.csproj">
-      <Project>{94f187be-99e0-4a71-9f5a-deb227b811fc}</Project>
+      <Project>{94F187BE-99E0-4A71-9F5A-DEB227B811FC}</Project>
       <Name>Dialogs.Touch</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dialogs\Dialogs.csproj">
-      <Project>{244344ed-821f-429d-99bb-643504ba916c}</Project>
+      <Project>{244344ED-821F-429D-99BB-643504BA916C}</Project>
       <Name>Dialogs</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sample.Core\Sample.Core.csproj">
-      <Project>{8bd51290-2e41-42a6-b756-a6fd9ce82515}</Project>
+      <Project>{8BD51290-2E41-42A6-B756-A6FD9CE82515}</Project>
       <Name>Sample.Core</Name>
     </ProjectReference>
   </ItemGroup>

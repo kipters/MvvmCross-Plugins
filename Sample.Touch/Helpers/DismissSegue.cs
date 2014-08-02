@@ -17,8 +17,8 @@ namespace Sample.Touch.Helpers
 
         public override void Perform()
         {
-            base.Perform();
             SourceViewController.PresentingViewController.DismissViewController(true, null);
+            //base.Perform();
         }
     }
 }

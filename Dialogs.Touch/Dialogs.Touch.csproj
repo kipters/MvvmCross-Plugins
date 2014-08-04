@@ -61,12 +61,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Dialogs\Dialogs.csproj">
-      <Project>{244344ED-821F-429D-99BB-643504BA916C}</Project>
-      <Name>Dialogs</Name>
-    </ProjectReference>
+    <Reference Include="Cirrious.MvvmCross.Touch">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.Touch.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="FDStatusBarNotifierView">
+      <HintPath>..\..\Xamarin.iOS-FDStatusBarNotifierView-Binding\FDStatusBarNotifierView\Binding\bin\Release\FDStatusBarNotifierView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
@@ -76,4 +79,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\Dialogs\Dialogs.csproj">
+      <Project>{244344ED-821F-429D-99BB-643504BA916C}</Project>
+      <Name>Dialogs</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

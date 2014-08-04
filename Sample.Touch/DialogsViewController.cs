@@ -23,6 +23,10 @@ namespace Sample.Touch
             binding.Bind(ConfirmButton).To(x => x.ConfirmCommand);
             binding.Bind(StringButton).To(x => x.StringPromptCommand);
             binding.Bind(PasswordButton).To(x => x.PasswordPromptCommand);
+            binding.Bind(lengthSwitch).To(x => x.LongToast);
+            binding.Bind(lengthLabel).To(x => x.LongToast).WithConversion("SubtleNotificationLengthToString", null);
+            binding.Bind(ShowSubtleButton).To(x => x.ShowSubtleNotificationCommand);
+            binding.Bind(HideSubtleButton).To(x => x.HideSubtleNotificationCommand);
             binding.Apply();
         }
 

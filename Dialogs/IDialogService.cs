@@ -12,6 +12,9 @@ namespace Kipware.MvvmCross.Plugin.Dialogs
         Task<PromptResult<string>> StringPromptAsync(string message, string title, string defaultText = null, string confirmText = null, string cancelText = null);
 
         Task<PromptResult<string>> PasswordPromptAsync(string message, string title, string confirmText = null, string cancelText = null);
+
+        void ShowSubtleNotification(string text, SubtleNotificationDuration duration = SubtleNotificationDuration.Short);
+        void HideSubtleNotification();
     }
 
     public class PromptResult<T>

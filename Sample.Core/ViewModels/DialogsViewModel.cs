@@ -84,5 +84,34 @@ namespace Sample.Core.ViewModels
                 return _passwordPromptCommand;
             }
         }
+
+        private bool _longToast;
+        public bool LongToast { get { return _longToast; } set { _longToast = value; RaisePropertyChanged(() => LongToast); } }
+
+        private ICommand _showSubtleNotificationCommand;
+        public ICommand ShowSubtleNotificationCommand
+        {
+            get
+            {
+                _showSubtleNotificationCommand = _showSubtleNotificationCommand ?? new MvxCommand(() =>
+                {
+                    _dialogService.ShowSubtleNotification(Message, LongToast ? SubtleNotificationDuration.Long : SubtleNotificationDuration.Short);
+                });
+                return _showSubtleNotificationCommand;
+            }
+        }
+
+        private ICommand _hideSubtleNotificationCommand;
+        public ICommand HideSubtleNotificationCommand
+        {
+            get
+            {
+                _hideSubtleNotificationCommand = _hideSubtleNotificationCommand ?? new MvxCommand(() =>
+                {
+                    _dialogService.HideSubtleNotification();
+                });
+                return _hideSubtleNotificationCommand;
+            }
+        }
     }
 }

@@ -1,6 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Frankdilo.FDStatusBarNotifierView;
+using Cirrious.CrossCore;
 
 namespace Kipware.MvvmCross.Plugin.Dialogs.Touch
 {
@@ -8,6 +11,17 @@ namespace Kipware.MvvmCross.Plugin.Dialogs.Touch
     {
         public string DefaultConfirmText { get; set; }
         public string DefaultCancelText { get; set; }
+
+        private UINavigationController _rootController;
+
+        public TouchDialogService()
+        {
+            var presenterInstance = Mvx.Resolve<IMvxTouchViewPresenter>();
+            var presenter = presenterInstance as MvxTouchViewPresenter;
+            _rootController = presenter.MasterNavigationController;
+            //_rootController = (Mvx.Resolve<IMvxTouchViewPresenter>() as MvxTouchViewPresenter).MasterNavigationController;
+        }
+
         public Task AlertAsync(string message, string title, string confirmText = null)
         {
             var tcs = new TaskCompletionSource<object>();
@@ -91,6 +105,28 @@ namespace Kipware.MvvmCross.Plugin.Dialogs.Touch
             uav.Show();
 
             return tcs.Task;
+        }
+
+        FDStatusBarNotifierView _view;
+        public void ShowSubtleNotification(string text, SubtleNotificationDuration duration = SubtleNotificationDuration.Short)
+        {
+            _view = new FDStatusBarNotifierView(text)
+            { 
+                ManuallyHide = false, 
+                ShouldHideOnTap = true, 
+                TimeOnScreen = TimeSpan.FromMilliseconds(duration == SubtleNotificationDuration.Short 
+                    ? 2000 
+                    : 3500) 
+            };
+            _view.ShowAboveNavigationController(_rootController);
+        }
+
+        public void HideSubtleNotification()
+        {
+            if (_view == null)
+                return;
+
+            _view.Hide();
         }
     }
 }

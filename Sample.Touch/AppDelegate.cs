@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using Cirrious.MvvmCross.Touch.Platform;
+using Cirrious.MvvmCross.Touch.Views.Presenters;
+using Cirrious.CrossCore;
+using Cirrious.MvvmCross.ViewModels;
 
 namespace Sample.Touch
 {
@@ -10,7 +14,7 @@ namespace Sample.Touch
     // User Interface of the application, as well as listening (and optionally responding) to
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : UIApplicationDelegate
+    public partial class AppDelegate : MvxApplicationDelegate
     {
         // class-level declarations
         public override UIWindow Window
@@ -18,6 +22,17 @@ namespace Sample.Touch
             get;
             set;
         }
+
+        public override void FinishedLaunching(UIApplication application)
+        {
+            var presenter = new MvxModalSupportTouchViewPresenter(this, Window);
+            var setup = new Setup(this, presenter);
+            setup.Initialize();
+
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
+        }
+
         // This method is invoked when the application is about to move from active to inactive state.
         // OpenGL applications should use this method to pause.
         public override void OnResignActivation(UIApplication application)

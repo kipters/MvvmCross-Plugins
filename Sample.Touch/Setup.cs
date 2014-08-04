@@ -17,6 +17,16 @@ namespace Sample.Touch
 
         public Setup(MvxApplicationDelegate applicationDelegate, MvxTouchViewPresenter presenter) : base(applicationDelegate, presenter) { }
 
+        protected override Cirrious.CrossCore.Plugins.IMvxPluginConfiguration GetPluginConfiguration(System.Type plugin)
+        {
+            if (plugin == typeof(Kipware.MvvmCross.Plugin.Dialogs.PluginLoader))
+            {
+                var config = new Kipware.MvvmCross.Plugin.Dialogs.DialogPluginConfiguration("cancel", "ok");
+                return config;
+            }
+            return null;
+        }
+
 	    protected override IMvxTouchViewsContainer CreateTouchViewsContainer()
 	    {
 	        return new UniversalStoryboardTouchViewsContainer();

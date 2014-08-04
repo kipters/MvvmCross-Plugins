@@ -24,10 +24,10 @@ namespace Sample.Core.ViewModels
         private string _cancelText;
         public string CancelText { get { return _cancelText; } set { _cancelText = value; RaisePropertyChanged(() => CancelText); } }
 
-        private string _message;
+        private string _message = "message";
         public string Message { get { return _message; } set { _message = value; RaisePropertyChanged(() => Message); } }
 
-        private string _title;
+        private string _title = "title";
         public string Title { get { return _title; } set { _title = value; RaisePropertyChanged(() => Title); } }
 
         private ICommand _alertCommand;

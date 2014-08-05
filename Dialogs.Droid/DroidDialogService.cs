@@ -17,6 +17,7 @@ namespace Dialogs.Droid
     {
         public string DefaultConfirmText { get; set; }
         public string DefaultCancelText { get; set; }
+
         public Task AlertAsync(string message, string title, string confirmText = null)
         {
             var tcs = new TaskCompletionSource<object>();
@@ -132,14 +133,21 @@ namespace Dialogs.Droid
             return tcs.Task;
         }
 
+        private Toast _toast;
+        private Timer _hideTimer;
         public void ShowSubtleNotification(string text, SubtleNotificationDuration duration = SubtleNotificationDuration.Short)
         {
-            throw new NotImplementedException();
+            _toast = new Toast(TopActivity);
+            _toast.Duration = duration == SubtleNotificationDuration.Short
+                ? ToastLength.Short
+                : ToastLength.Long;
+            _toast.Show();
         }
 
         public void HideSubtleNotification()
         {
-            throw new NotImplementedException();
+            if (_toast != null)
+                _toast.Cancel();
         }
 
         private Activity TopActivity

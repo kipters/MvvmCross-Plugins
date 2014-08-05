@@ -2,8 +2,10 @@ using System;
 using System.Threading.Tasks;
 using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views.Presenters;
-using Frankdilo.FDStatusBarNotifierView;
 using Cirrious.CrossCore;
+using Frankdilo.FDStatusBarNotifierView;
+using System.Threading;
+using MonoTouch.Foundation;
 
 namespace Kipware.MvvmCross.Plugin.Dialogs.Touch
 {
@@ -14,12 +16,33 @@ namespace Kipware.MvvmCross.Plugin.Dialogs.Touch
 
         private UINavigationController _rootController;
 
+        private UINavigationController RootController
+        {
+            get
+            {
+                if (_rootController == null)
+                {
+                    var presenterInstance = Mvx.Resolve<IMvxTouchViewPresenter>();
+                    var presenter = presenterInstance as MvxTouchViewPresenter;
+                    _rootController = presenter.MasterNavigationController;
+                }
+
+                return _rootController;
+            }
+        }
+
+        private Timer _hideTimer;
         public TouchDialogService()
         {
-            var presenterInstance = Mvx.Resolve<IMvxTouchViewPresenter>();
-            var presenter = presenterInstance as MvxTouchViewPresenter;
-            _rootController = presenter.MasterNavigationController;
-            //_rootController = (Mvx.Resolve<IMvxTouchViewPresenter>() as MvxTouchViewPresenter).MasterNavigationController;
+            _hideTimer = new Timer(state => ExecuteOnMainThread(HideSubtleNotification), null, Timeout.Infinite, Timeout.Infinite);
+            _view = new FDStatusBarNotifierView(string.Empty)
+                { 
+                    ManuallyHide = true, 
+                    //ShouldHideOnTap = true, 
+                    /*TimeOnScreen = TimeSpan.FromMilliseconds(duration == SubtleNotificationDuration.Short 
+                    ? 2000 
+                    : */
+                };
         }
 
         public Task AlertAsync(string message, string title, string confirmText = null)
@@ -108,25 +131,30 @@ namespace Kipware.MvvmCross.Plugin.Dialogs.Touch
         }
 
         FDStatusBarNotifierView _view;
+
         public void ShowSubtleNotification(string text, SubtleNotificationDuration duration = SubtleNotificationDuration.Short)
         {
-            _view = new FDStatusBarNotifierView(text)
-            { 
-                ManuallyHide = false, 
-                ShouldHideOnTap = true, 
-                TimeOnScreen = TimeSpan.FromMilliseconds(duration == SubtleNotificationDuration.Short 
-                    ? 2000 
-                    : 3500) 
-            };
-            _view.ShowAboveNavigationController(_rootController);
+            _view.Message = text;
+
+            var dueTime = duration == SubtleNotificationDuration.Short ? 2000 : 3500;
+            _hideTimer.Change(dueTime, Timeout.Infinite);
+
+            if (_view.IsHidden)
+                _view.ShowAboveNavigationController(RootController);
         }
 
         public void HideSubtleNotification()
         {
-            if (_view == null)
+            if (_view == null || _view.IsHidden)
                 return;
 
             _view.Hide();
+        }
+
+        public void ExecuteOnMainThread(Action action)
+        {
+            var obj = new NSObject();
+            obj.InvokeOnMainThread(new NSAction(action));
         }
     }
 }

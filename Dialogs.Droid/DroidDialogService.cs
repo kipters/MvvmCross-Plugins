@@ -132,6 +132,16 @@ namespace Dialogs.Droid
             return tcs.Task;
         }
 
+        public void ShowSubtleNotification(string text, SubtleNotificationDuration duration = SubtleNotificationDuration.Short)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HideSubtleNotification()
+        {
+            throw new NotImplementedException();
+        }
+
         private Activity TopActivity
         {
             get { return Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity; }

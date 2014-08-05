@@ -68,7 +68,7 @@
       <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.1.1\lib\MonoTouch\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
     <Reference Include="FDStatusBarNotifierView">
-      <HintPath>..\..\Xamarin.iOS-FDStatusBarNotifierView-Binding\FDStatusBarNotifierView\Binding\bin\Release\FDStatusBarNotifierView.dll</HintPath>
+      <HintPath>..\packages\Kipware.FDStatusBarNotifierView.1.0.2\lib\MonoTouch\FDStatusBarNotifierView.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

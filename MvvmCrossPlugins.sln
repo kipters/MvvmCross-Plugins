@@ -83,6 +83,7 @@ Global
 		{244344ED-821F-429D-99BB-643504BA916C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{244344ED-821F-429D-99BB-643504BA916C}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{244344ED-821F-429D-99BB-643504BA916C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{244344ED-821F-429D-99BB-643504BA916C}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{244344ED-821F-429D-99BB-643504BA916C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{244344ED-821F-429D-99BB-643504BA916C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{244344ED-821F-429D-99BB-643504BA916C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -188,6 +189,7 @@ Global
 		{8BD51290-2E41-42A6-B756-A6FD9CE82515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BD51290-2E41-42A6-B756-A6FD9CE82515}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{8BD51290-2E41-42A6-B756-A6FD9CE82515}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{8BD51290-2E41-42A6-B756-A6FD9CE82515}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{8BD51290-2E41-42A6-B756-A6FD9CE82515}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{8BD51290-2E41-42A6-B756-A6FD9CE82515}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{8BD51290-2E41-42A6-B756-A6FD9CE82515}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -221,6 +223,7 @@ Global
 		{94F187BE-99E0-4A71-9F5A-DEB227B811FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F187BE-99E0-4A71-9F5A-DEB227B811FC}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{94F187BE-99E0-4A71-9F5A-DEB227B811FC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{94F187BE-99E0-4A71-9F5A-DEB227B811FC}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{94F187BE-99E0-4A71-9F5A-DEB227B811FC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{94F187BE-99E0-4A71-9F5A-DEB227B811FC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{94F187BE-99E0-4A71-9F5A-DEB227B811FC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -294,7 +297,7 @@ Global
 		{9E8BE03E-3D60-46C3-9343-DC8CFD0A7C50} = {76243B73-9FC7-4EE1-841B-2EF2C01263EB}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Sample.Touch\Sample.Touch.csproj
+		StartupItem = Sample.Droid\Sample.Droid.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

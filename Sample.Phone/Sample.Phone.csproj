@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrap\DialogsPluginBootstrap.cs" />
+    <Compile Include="CoreConverters\SubtleNotificationLengthToStringPhoneValueConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">

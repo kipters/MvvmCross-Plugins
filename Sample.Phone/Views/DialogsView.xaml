@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:coreConverters="clr-namespace:Sample.Phone.CoreConverters"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -17,22 +18,62 @@
         <Style TargetType="TextBlock" BasedOn="{StaticResource PhoneTextSubtleStyle}">
             <Setter Property="Margin" Value="12,0,0,-9"/>
         </Style>
+        <coreConverters:SubtleNotificationLengthToStringPhoneValueConverter x:Key="SubtleNotificationLengthToStringPhoneValueConverter" />
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
+        <phone:Pivot Title="PLUGINS">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" 
+                               Style="{StaticResource PhoneTextExtraLargeStyle}"
+                               Margin="0,0,-12,0"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            
+            <phone:PivotItem Header="fields">
+                <StackPanel>
+                    <TextBlock Text="Message" />
+                    <TextBox Text="{Binding Message, Mode=TwoWay}" />
+                    <TextBlock Text="Title" />
+                    <TextBox Text="{Binding Title, Mode=TwoWay}" />
+                    <TextBlock Text="Confirm Text" />
+                    <TextBox Text="{Binding ConfirmText, Mode=TwoWay}" />
+                    <TextBlock Text="Cancel Text" />
+                    <TextBox Text="{Binding CancelText, Mode=TwoWay}" />
+                </StackPanel>
+            </phone:PivotItem>
+            
+            <phone:PivotItem Header="alerts">
+                <StackPanel>
+                    <Button Content="Alert" Command="{Binding AlertCommand}" />
+                    <Button Content="Confirm" Command="{Binding ConfirmCommand}" />
+                    <Button Content="String Prompt" Command="{Binding StringPromptCommand}" />
+                    <Button Content="Password Prompt" Command="{Binding PasswordPromptCommand}" />
+                </StackPanel>
+            </phone:PivotItem>
+            
+            <phone:PivotItem Header="notifications">
+                <StackPanel>
+                    <CheckBox Content="{Binding LongToast, Converter={StaticResource SubtleNotificationLengthToStringPhoneValueConverter}}" 
+                              IsChecked="{Binding LongToast, Mode=TwoWay}"/>
+                    <Button Content="Show subtle" Command="{Binding ShowSubtleNotificationCommand}"/>
+                    <Button Content="Hide subtle" Command="{Binding HideSubtleNotificationCommand}"/>
+                </StackPanel>
+            </phone:PivotItem>
+        </phone:Pivot>
+        
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="KIPWARE MVVMCROSS PLUGINS" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock Text="dialogs" Margin="9,-7,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
         <ScrollViewer x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
                 <TextBlock Text="Message" />
@@ -48,7 +89,7 @@
                 <Button Content="String Prompt" Command="{Binding StringPromptCommand}" />
                 <Button Content="Password Prompt" Command="{Binding PasswordPromptCommand}" />
             </StackPanel>
-        </ScrollViewer>
+        </ScrollViewer>-->
     </Grid>
 
 </phone:PhoneApplicationPage>

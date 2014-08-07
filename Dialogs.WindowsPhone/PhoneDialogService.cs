@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using Windows.Foundation.Metadata;
+using Microsoft.Phone.Shell;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 
@@ -6,6 +11,20 @@ namespace Kipware.MvvmCross.Plugin.Dialogs.WindowsPhone
 {
     public class PhoneDialogService : IDialogService
     {
+        private readonly Timer _timer;
+
+        public PhoneDialogService()
+        {
+            SystemTray.ProgressIndicator = new ProgressIndicator()
+            {
+                IsIndeterminate = false,
+                Value = 0,
+                IsVisible = false
+            };
+
+            _timer = new Timer(state => ExecuteOnMainThread(HideSubtleNotification), null, Timeout.Infinite, Timeout.Infinite);
+        }
+
         public string DefaultConfirmText { get; set; }
         public string DefaultCancelText { get; set; }
         public Task AlertAsync(string message, string title, string confirmText = null)
@@ -32,15 +51,33 @@ namespace Kipware.MvvmCross.Plugin.Dialogs.WindowsPhone
         public Task<PromptResult<string>> StringPromptAsync(string message, string title, string defaultText = null, string confirmText = null,
             string cancelText = null)
         {
-            return internalPromptAsynx(message, title, defaultText ?? string.Empty, false);
+            return internalPromptAsync(message, title, defaultText ?? string.Empty, false);
         }
 
         public Task<PromptResult<string>> PasswordPromptAsync(string message, string title, string confirmText = null, string cancelText = null)
         {
-            return internalPromptAsynx(message, title, null, true);
+            return internalPromptAsync(message, title, null, true);
         }
 
-        private Task<PromptResult<string>> internalPromptAsynx(string message, string title, string defaultText,
+        public void ShowSubtleNotification(string text, SubtleNotificationDuration duration = SubtleNotificationDuration.Short)
+        {
+            var pi = SystemTray.ProgressIndicator;
+            pi.IsVisible = false;
+            pi.Text = text;
+            pi.IsIndeterminate = false;
+            pi.Value = 0;
+            pi.IsVisible = true;
+
+            var dueTime = duration == SubtleNotificationDuration.Short ? 2000 : 3500;
+            _timer.Change(dueTime, Timeout.Infinite);
+        }
+
+        public void HideSubtleNotification()
+        {
+            SystemTray.ProgressIndicator.IsVisible = false;
+        }
+
+        private Task<PromptResult<string>> internalPromptAsync(string message, string title, string defaultText,
             bool password)
         {
             var tcs = new TaskCompletionSource<PromptResult<string>>();
@@ -53,6 +90,11 @@ namespace Kipware.MvvmCross.Plugin.Dialogs.WindowsPhone
             }, null, password);
 
             return tcs.Task;
+        }
+
+        private void ExecuteOnMainThread(Action action)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(action);
         }
     }
 }
